@@ -1,5 +1,6 @@
 ;BBL (BubbleBootLoader)
 ;The bootloader of BubbleOS
+
 ;Made by Soen KIEFFER
 ;Github repo: https://github.com/Soen-Kieffer/BubbleOS
 

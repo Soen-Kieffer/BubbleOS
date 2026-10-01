@@ -1,8 +1,15 @@
+;Bubble OS version ALPHA 0.2, 10/2026
+;
+
 [bits 16]
 [org 0x0000]
 
+
 push cs
 pop ds
+
+
+test_load: equ 0x0800
 
 start_os:
 
@@ -46,7 +53,7 @@ enter:
             jz echo
         cmp al, 0x63 ;c
             jz clear
-        cmp al, 0x68
+        cmp al, 0x68 ;h
             jz help
         else_handle_fct:
         mov si, unknown_fct
