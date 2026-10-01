@@ -1,5 +1,8 @@
 [bits 16]
 [org 0X7C00]
+cpu 8086
+
+
 
 cli
 cld
@@ -44,6 +47,8 @@ enter:
     handle_fonction:
         mov si, input_string
         lodsb
+        cmp al, 0
+            jz end_handle_fct
         cmp al, 0x76 ;v
             jz fct_v
         cmp al, 0x73 ;s
@@ -159,6 +164,7 @@ unknown_fct: db 10,13,"Unknown Fonction ", 0
 hello: db "HelloWorld!", 0
 stop_msg: db 10,13, "Goodbye", 0
 space_indx: db 0
+before_input: db 0xFF
 input_string: times 16 db 0
 ;help_str: db 10,13,"Help:", 10,13, "h -> help page", 10,13,"e -> echo", 10,13, "v [h] -> version",10,13, "c -> reset screen", 10,13,"s -> stop", 0
 
