@@ -98,20 +98,11 @@ fct_v:
     mov si, retour
     call print
 
-    mov si, input_string
-    call wait_space
-    lodsb
-    cmp al, 0x68
-    jz helloworld
     mov si, version
     call print
 
 jmp end_handle_fct
 
-helloworld:
-    mov si, hello
-    call print
-jmp end_handle_fct
 
 reset:
     mov cx, 16
@@ -159,16 +150,18 @@ version: db "Bubble OS Alpha 0.1", 0
 retour: db 10,13, 0
 start_line: db 10,13,">", 0
 unknown_fct: db 10,13,"Unknown Fonction ", 0
-hello: db "HelloWorld!", 0
-stop_msg: db 10,13, "Goodbye", 0
-space_indx: db 0
 before_input: db 0xFF
 input_string: times 16 db 0
-help_str: db 10,13,"Help:", 10,13, "h -> display this help page", 10,13,"e [str] -> echo string", 10,13, "v [h] -> version",10,13, "c -> reset screen", 10,13,"s -> stop the OS", 0
+help_str: db 10,13,"    Help:", 10,13, "    h       -> display this help page", 10,13,"    e [str] -> echo string", 10,13, "    v       -> version",10,13, "    c       -> reset screen", 10,13,"    s       -> stop the OS", 0
+err_APM_msg: db "APM Error", 0
 
 stop:
-    mov si, stop_msg
-    call print
+    ;Set the power state for all devices
+    mov ah,53h              ;this is an APM command
+    mov al,07h              ;Set the power state...
+    mov bx,0001h            ;...on all devices to...
+    mov cx,03h    ;see above
+    int 15h                 ;call the BIOS function through interrupt 15h
     cli
     hlt
 
