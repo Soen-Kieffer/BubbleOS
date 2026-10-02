@@ -3,3 +3,5 @@ resources
 test/
 .vscode/
 APM_TEST/
+.~lock.documentation.odt#
+documentation.odt

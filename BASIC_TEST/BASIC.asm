@@ -22,6 +22,7 @@ loop_input:
     mov al, 0x0
     int 16h
 
+    display_char:
     cmp al, 0xD
         jz enter
     cmp al, 0x01
@@ -33,17 +34,15 @@ loop_input:
     jmp loop_input
 
 enter:
-    ;std
-    ;lodsb
-    ;lodsb
-    ;cmp al, 0x2F; / (!) in QWERTY
-    ;    jz INTERPRETOR
-    ;cld
-    ;lodsb
-    ;lodsb
     mov si, retour
     call print
-jmp loop_input
+
+    mov ah, 0x0
+    int 16h
+
+    cmp al, 0xD
+        jz INTERPRETOR
+jmp display_char
 
 ctl_A:
     mov si, welcome_msg
@@ -54,12 +53,16 @@ jmp STOP
 
 ; ----------------- [BubbleBASIC INTERPRETOR] -----------------
 INTERPRETOR:
+
+mov al, 0
+stosb
 mov ax, 03h
 int 10h
 
 mov si, interpretor_msg
 call print
-
+mov si, store_string
+call print
 jmp STOP
 
 ; ---------- [FONCTIONS ALREADY DEFINE IN MAIN FILE] ----------
@@ -94,7 +97,7 @@ ret
 
 
 welcome_msg: db "BubbleBASIC Developpement Version 0.1", 10,13, "DO NOT DISTRIBUTE", 10,13, 0
-interpretor_msg: db "Start Interpreting", 0
+interpretor_msg: db "Start Interpreting", 10,13,0
 retour: db 10,13, 0
 
 
