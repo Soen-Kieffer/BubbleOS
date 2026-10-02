@@ -1,4 +1,4 @@
-;Bubble OS version ALPHA 0.2, 10/2026
+;Bubble OS version ALPHA 0.2.1, 10/2026
 ;
 
 [bits 16]
@@ -145,8 +145,8 @@ help:
 
 
 
-msg: db "Welcome on Bubble OS", 10,13, "Version Alpha 0.1",0
-version: db "Bubble OS Alpha 0.1", 0
+msg: db "Welcome on Bubble OS", 10,13, "Version Alpha 0.2.1",0
+version: db "Bubble OS Alpha 0.2.1", 0
 retour: db 10,13, 0
 start_line: db 10,13,">", 0
 unknown_fct: db 10,13,"Unknown Fonction ", 0
