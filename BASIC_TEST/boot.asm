@@ -24,7 +24,7 @@ start:
     xor bx, bx              ; Offset de destination (ES:BX = 0x1000:0x0000)
 
     mov ah, 0x02            ; Fonction : lire les secteurs
-    mov al, 5               ; Nombre de secteurs à lire
+    mov al, 10               ; Nombre de secteurs à lire
     mov ch, 0               ; Cylindre 0
     mov cl, 2               ; Secteur 2 (le secteur 1 est le bootloader)
     mov dh, 0               ; Tête 0
